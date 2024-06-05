@@ -28,7 +28,15 @@ export class Server {
     }
 
     middlewares():void {
-        this.app.use(cors());
+
+        const corsOptions = {
+            origin: 'http://localhost:3001', // Tu frontend local
+            methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+            credentials: true, // Si necesitas enviar cookies o autenticación
+            optionsSuccessStatus: 204 // Para manejar exitosamente las solicitudes preflight
+        };
+
+        this.app.use(cors(corsOptions));
         this.app.use(express.json());
     }
 
